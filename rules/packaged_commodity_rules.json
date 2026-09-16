@@ -1,0 +1,522 @@
+{
+  "metadata": {
+    "title": "Packaged Commodity Compliance Rules",
+    "law": "Legal Metrology (Packaged Commodities) Rules, 2011",
+    "jurisdiction": "India",
+    "purpose": "AI-assisted compliance screening of pre-packaged commodities",
+    "warning": "This rule database is for compliance screening and not legal certification.",
+    "last_reviewed": "2026-08-26",
+    "source": "Department of Consumer Affairs, Government of India",
+    "rule_version": "2011_with_amendments"
+  },
+
+  "result_statuses": [
+    "PASS",
+    "FAIL",
+    "REVIEW",
+    "NOT_APPLICABLE",
+    "NOT_DETECTED"
+  ],
+
+  "package_types": [
+    "retail",
+    "wholesale",
+    "imported",
+    "promotional",
+    "unknown"
+  ],
+
+  "rules": {
+
+    "product_name": {
+      "rule_reference": "Rule 6",
+      "field": "product_name",
+      "name": "Common / Generic Name",
+      "required": true,
+      "applicability": "retail_package",
+      "severity": "HIGH",
+      "description": "The package should declare the common or generic name of the commodity.",
+      "detection_patterns": [
+        "product",
+        "product name",
+        "generic name",
+        "common name",
+        "commodity",
+        "item"
+      ],
+      "failure_message": "Common or generic name of the commodity was not detected."
+    },
+
+    "manufacturer_packer_importer": {
+      "rule_reference": "Rule 6",
+      "field": "manufacturer_packer_importer",
+      "name": "Manufacturer / Packer / Importer",
+      "required": true,
+      "applicability": "as_applicable",
+      "severity": "HIGH",
+      "description": "The applicable name and address information for manufacturer, packer or importer must be declared.",
+      "detection_patterns": [
+        "manufactured by",
+        "manufactured & marketed by",
+        "manufactured and marketed by",
+        "mfd by",
+        "mfg by",
+        "manufactured for",
+        "packed by",
+        "packed & marketed by",
+        "packed and marketed by",
+        "imported by",
+        "importer",
+        "marketed by"
+      ],
+      "failure_message": "Applicable manufacturer, packer or importer information was not detected."
+    },
+
+    "manufacturer_address": {
+      "rule_reference": "Rule 6",
+      "field": "manufacturer_address",
+      "name": "Manufacturer / Packer / Importer Address",
+      "required": true,
+      "applicability": "as_applicable",
+      "severity": "HIGH",
+      "description": "The applicable address information should be declared.",
+      "failure_message": "Required address information was not detected."
+    },
+
+    "country_of_origin": {
+      "rule_reference": "Rule 6",
+      "field": "country_of_origin",
+      "name": "Country of Origin",
+      "required": true,
+      "applicability": "imported_package",
+      "severity": "HIGH",
+      "description": "Country of origin should be declared for imported products.",
+      "detection_patterns": [
+        "country of origin",
+        "made in",
+        "product of",
+        "origin"
+      ],
+      "failure_message": "Country of origin was not detected for an imported product."
+    },
+
+    "net_quantity": {
+      "rule_reference": "Rule 6 / Rule 13",
+      "field": "net_quantity",
+      "name": "Net Quantity",
+      "required": true,
+      "applicability": "retail_package",
+      "severity": "CRITICAL",
+      "description": "Net quantity should be declared in terms of standard units of weight, measure or number, as applicable.",
+      "detection_patterns": [
+        "net quantity",
+        "net qty",
+        "net weight",
+        "net wt",
+        "net volume",
+        "net vol",
+        "quantity",
+        "contents"
+      ],
+      "supported_quantity_types": [
+        "weight",
+        "volume",
+        "length",
+        "number"
+      ],
+      "failure_message": "Net quantity was not detected."
+    },
+
+    "quantity_unit": {
+      "rule_reference": "Rule 13",
+      "field": "quantity_unit",
+      "name": "Standard Unit",
+      "required": true,
+      "applicability": "when_quantity_is_declared",
+      "severity": "HIGH",
+      "description": "The quantity should use an appropriate standard unit of weight, measure or number.",
+      "allowed_units": {
+        "weight": [
+          "mg",
+          "g",
+          "kg",
+          "tonne"
+        ],
+        "volume": [
+          "ml",
+          "l",
+          "L"
+        ],
+        "length": [
+          "mm",
+          "cm",
+          "m"
+        ],
+        "number": [
+          "number",
+          "no",
+          "piece",
+          "pieces",
+          "unit",
+          "units",
+          "pair",
+          "set"
+        ]
+      },
+      "failure_message": "Quantity unit is missing or could not be validated."
+    },
+
+    "manufacture_date": {
+      "rule_reference": "Rule 6",
+      "field": "manufacture_date",
+      "name": "Month and Year of Manufacture",
+      "required": true,
+      "applicability": "retail_package",
+      "severity": "HIGH",
+      "description": "Month and year of manufacture should be declared where applicable.",
+      "detection_patterns": [
+        "mfd",
+        "mfg",
+        "manufactured",
+        "date of manufacture",
+        "manufacturing date",
+        "month and year",
+        "m",
+        "dom"
+      ],
+      "accepted_formats": [
+        "MM/YYYY",
+        "MM-YYYY",
+        "MM.YYYY",
+        "MMM YYYY",
+        "MONTH YYYY"
+      ],
+      "failure_message": "Month and year of manufacture were not detected."
+    },
+
+    "packing_date": {
+      "rule_reference": "Rule 6",
+      "field": "packing_date",
+      "name": "Packing / Pre-packing Information",
+      "required": false,
+      "applicability": "as_applicable",
+      "severity": "MEDIUM",
+      "description": "Packing or pre-packing information may be relevant depending on the product and applicable requirement.",
+      "detection_patterns": [
+        "pkd",
+        "packed on",
+        "packing date",
+        "packed"
+      ],
+      "failure_message": "Packing information could not be detected where applicable."
+    },
+
+    "best_before_use_by": {
+      "rule_reference": "Rule 6",
+      "field": "best_before_use_by",
+      "name": "Best Before / Use By",
+      "required": true,
+      "applicability": "commodities_that_may_become_unfit_for_human_consumption",
+      "severity": "CRITICAL",
+      "description": "Best before or use by information should be declared for commodities to which the requirement applies.",
+      "detection_patterns": [
+        "best before",
+        "best before end",
+        "use by",
+        "expiry",
+        "exp",
+        "date of expiry"
+      ],
+      "failure_message": "Best-before or use-by information was not detected where applicable."
+    },
+
+    "mrp": {
+      "rule_reference": "Rule 6",
+      "field": "mrp",
+      "name": "Maximum Retail Price",
+      "required": true,
+      "applicability": "retail_package",
+      "severity": "CRITICAL",
+      "description": "Retail sale price should be declared in Indian currency and in the prescribed form.",
+      "detection_patterns": [
+        "mrp",
+        "maximum retail price",
+        "retail price",
+        "rs",
+        "₹"
+      ],
+      "currency": "INR",
+      "failure_message": "Maximum Retail Price was not detected."
+    },
+
+    "mrp_inclusive_of_taxes": {
+      "rule_reference": "Rule 6",
+      "field": "mrp_tax_statement",
+      "name": "MRP Tax Inclusion",
+      "required": true,
+      "applicability": "retail_package",
+      "severity": "HIGH",
+      "description": "MRP declaration should follow the prescribed tax-inclusive requirement.",
+      "detection_patterns": [
+        "inclusive of all taxes",
+        "incl of all taxes",
+        "inclusive taxes",
+        "all taxes"
+      ],
+      "failure_message": "Required MRP tax-inclusive wording was not detected."
+    },
+
+    "consumer_care": {
+      "rule_reference": "Rule 6",
+      "field": "consumer_care",
+      "name": "Consumer Care Details",
+      "required": true,
+      "applicability": "retail_package",
+      "severity": "HIGH",
+      "description": "Consumer care / complaint contact information should be declared.",
+      "detection_patterns": [
+        "consumer care",
+        "consumer complaint",
+        "customer care",
+        "customer service",
+        "toll free",
+        "helpline",
+        "contact us",
+        "email"
+      ],
+      "expected_data": [
+        "name",
+        "address",
+        "telephone",
+        "email"
+      ],
+      "failure_message": "Consumer care details were not detected."
+    },
+
+    "dimensions": {
+      "rule_reference": "Rule 6",
+      "field": "dimensions",
+      "name": "Dimensions",
+      "required": true,
+      "applicability": "where_size_or_dimensions_are_relevant",
+      "severity": "MEDIUM",
+      "description": "Dimensions should be declared where the size of the commodity is relevant.",
+      "detection_patterns": [
+        "size",
+        "dimensions",
+        "length",
+        "width",
+        "height",
+        "diameter"
+      ],
+      "failure_message": "Required dimensions were not detected."
+    },
+
+    "unit_sale_price": {
+      "rule_reference": "Rule 6(11)",
+      "field": "unit_sale_price",
+      "name": "Unit Sale Price",
+      "required": true,
+      "applicability": "pre_packaged_commodity",
+      "severity": "HIGH",
+      "description": "Unit sale price should be declared in the prescribed form according to the quantity or measure of the commodity.",
+      "patterns": [
+        "Rs.__ per g",
+        "Rs.__ per kg",
+        "Rs.__ per cm",
+        "Rs.__ per meter",
+        "Rs.__ per number",
+        "Rs.__ per ml",
+        "Rs.__ per litre"
+      ],
+      "failure_message": "Unit sale price was not detected."
+    },
+
+    "number_of_items": {
+      "rule_reference": "Rule 13",
+      "field": "number_of_items",
+      "name": "Number / Unit / Piece / Pair / Set",
+      "required": true,
+      "applicability": "items_sold_by_number",
+      "severity": "HIGH",
+      "description": "For items sold by number, the number, unit, piece, pair, set or other appropriate quantity expression should be declared.",
+      "detection_patterns": [
+        "number",
+        "no.",
+        "pcs",
+        "pieces",
+        "piece",
+        "pair",
+        "set",
+        "units"
+      ],
+      "failure_message": "Required number or unit declaration was not detected."
+    },
+
+    "promotional_group": {
+      "rule_reference": "Rule 4(2)",
+      "field": "promotional_group",
+      "name": "Promotional Retail Group",
+      "required": true,
+      "applicability": "promotional_offer_group",
+      "severity": "HIGH",
+      "description": "Where packages intended for retail sale are grouped for a promotional retail offer, every package in the group should comply with Rule 6.",
+      "failure_message": "One or more packages in the promotional group may not contain required Rule 6 declarations."
+    },
+
+    "declaration_legibility": {
+      "rule_reference": "Rule 8 / Rule 9",
+      "field": "declaration_legibility",
+      "name": "Declaration Legibility",
+      "required": true,
+      "applicability": "retail_package",
+      "severity": "MEDIUM",
+      "description": "Required declarations should be clear, legible and conspicuous.",
+      "computer_vision_checks": [
+        "ocr_confidence",
+        "text_contrast",
+        "blur_score",
+        "text_size",
+        "visibility"
+      ],
+      "failure_message": "One or more declarations may not be sufficiently legible."
+    },
+
+    "declaration_language": {
+      "rule_reference": "Rule 10",
+      "field": "declaration_language",
+      "name": "Declaration Language",
+      "required": true,
+      "applicability": "retail_package",
+      "severity": "MEDIUM",
+      "description": "Required declarations should be made in Hindi in Devanagari script or English, with additional languages permitted.",
+      "accepted_primary_languages": [
+        "English",
+        "Hindi"
+      ],
+      "failure_message": "Required declaration language could not be verified."
+    },
+
+    "wholesale_package": {
+      "rule_reference": "Rule 24",
+      "field": "wholesale_declarations",
+      "name": "Wholesale Package Declarations",
+      "required": true,
+      "applicability": "wholesale_package",
+      "severity": "HIGH",
+      "description": "Wholesale packages are subject to the declarations specified for wholesale packages.",
+      "checks": [
+        "manufacturer_packer_importer",
+        "commodity_identity",
+        "total_number_of_retail_packages_or_net_quantity"
+      ],
+      "failure_message": "Required wholesale package declarations were not detected."
+    },
+
+    "registration": {
+      "rule_reference": "Rule 27",
+      "field": "registration",
+      "name": "Manufacturer / Packer / Importer Registration",
+      "required": true,
+      "applicability": "registered_entity",
+      "severity": "CRITICAL",
+      "verification_method": "external_database_or_document",
+      "description": "Registration status cannot reliably be verified from a package photograph alone.",
+      "failure_message": "Registration status requires external verification."
+    },
+
+    "quantity_accuracy": {
+      "rule_reference": "First Schedule / applicable quantity provisions",
+      "field": "quantity_accuracy",
+      "name": "Quantity Accuracy / Maximum Permissible Error",
+      "required": true,
+      "applicability": "physical_quantity_verification",
+      "severity": "CRITICAL",
+      "verification_method": "physical_measurement",
+      "description": "A camera image alone cannot establish actual net quantity or maximum permissible error. Physical weighing or measurement is required.",
+      "failure_message": "Physical measurement is required to verify quantity accuracy."
+    }
+  },
+
+  "ai_extraction_fields": {
+    "product_name": {
+      "type": "string"
+    },
+    "manufacturer": {
+      "type": "string"
+    },
+    "manufacturer_address": {
+      "type": "string"
+    },
+    "packer": {
+      "type": "string"
+    },
+    "packer_address": {
+      "type": "string"
+    },
+    "importer": {
+      "type": "string"
+    },
+    "importer_address": {
+      "type": "string"
+    },
+    "country_of_origin": {
+      "type": "string"
+    },
+    "net_quantity": {
+      "type": "number"
+    },
+    "quantity_unit": {
+      "type": "string"
+    },
+    "mrp": {
+      "type": "number"
+    },
+    "manufacture_date": {
+      "type": "string"
+    },
+    "packing_date": {
+      "type": "string"
+    },
+    "best_before_use_by": {
+      "type": "string"
+    },
+    "consumer_care_phone": {
+      "type": "string"
+    },
+    "consumer_care_email": {
+      "type": "string"
+    },
+    "dimensions": {
+      "type": "string"
+    },
+    "unit_sale_price": {
+      "type": "string"
+    },
+    "number_of_items": {
+      "type": "number"
+    }
+  },
+
+  "decision_logic": {
+    "critical_failure": [
+      "net_quantity",
+      "mrp",
+      "manufacturer_packer_importer",
+      "country_of_origin",
+      "best_before_use_by"
+    ],
+    "review_required": [
+      "quantity_accuracy",
+      "registration",
+      "declaration_legibility",
+      "applicability_uncertain"
+    ],
+    "not_applicable_allowed": true,
+    "overall_status_rules": {
+      "COMPLIANT": "All applicable critical and high-severity checks pass.",
+      "NON_COMPLIANT": "One or more applicable critical requirements fail.",
+      "REVIEW": "Required information cannot be reliably verified automatically."
+    }
+  }
+}
