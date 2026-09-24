@@ -1,0 +1,42 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+environment/
+
+# Node
+node_modules/
+
+# Environment files / secrets
+.env
+.env.*
+!.env.example
+
+# Python package initializer files
+**/__init__.py
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Large ML/model files
+*.pt
+*.pth
+*.onnx
+*.h5
